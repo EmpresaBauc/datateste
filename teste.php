@@ -1,5 +1,5 @@
 <?php
 
-exit(var_dump($_GET));
+exit(var_dump($_POST));
 
 ?>

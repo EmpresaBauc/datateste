@@ -3,81 +3,54 @@
 <head>
     <title></title>
     <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="libs/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <link href="libs/datetimepicker/css/jquery.datetimepicker.css" rel="stylesheet" media="screen">
 </head>
 
 <body>
 <div class="container">
-  <form action="teste.php" method="get" class="form-horizontal"  role="form">
-      <fieldset>
-          <legend>Test</legend>
-
-          <div class="form-group row">
-              <label for="dtp_input2" class="col-md-2 control-label">Date Picking</label>
-
-              <div class="input-group date input-daterange col-md-6" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input1" data-link-format="yyyy-mm-dd" >
-
-
-
-                <input type="text" class="form-control" name="data1" size="16" value="" readonly>
-
-
-
-                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-
-
-
-
-                <div class="input-group-addon">to</div>
-
-
-              <div class="input-group date input-daterange col-md-10 data-date=" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd" >
-
-
-                <input type="text" class="form-control" name="data2" size="16" value="" readonly>
-
-
-                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-
-
-                  <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-
-
-              </div>
-
-
-              </div>
-
-
-              <input type="hidden" id="dtp_input1" value="" /><br/>
-              <input type="hidden" id="dtp_input2" value="" /><br/>
-
-
-          <input type="submit" value="enviar">
-      </fieldset>
-  </form>
+  <div class="row">
+    <form action="teste.php" method="post" class="form-horizontal"  role="form">
+        <input id="date_timepicker_start" type="text" class="col-md-3" name="datas[data-1]">
+        <input id="date_timepicker_end" type="text" class="col-md-3" name="datas[data-2]">
+        <input type="submit" value="Gerar" class="col-md-3">
+    </form>
+  </div>
 </div>
+
+
+
 
 <script type="text/javascript" src="libs/jquery/js/jquery-3.2.1.min.js" charset="UTF-8"></script>
 <script type="text/javascript" src="libs/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="libs/datetimepicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-<script type="text/javascript" src="libs/datetimepicker/js/locales/bootstrap-datetimepicker.pt-BR.js" charset="UTF-8"></script>
+<script type="text/javascript" src="libs/datetimepicker/js/jquery.datetimepicker.full.min.js" charset="UTF-8"></script>
 <script type="text/javascript">
 
-	$('.input-daterange').datetimepicker({
+jQuery(function(){
 
-    language:  'pt-BR',
-       weekStart: 1,
-       todayBtn:  1,
-   autoclose: 1,
-   todayHighlight: 1,
-   startView: 2,
-   minView: 2,
-   forceParse: 0
-
+  $.datetimepicker.setLocale('pt-BR');
+ jQuery('#date_timepicker_start').datetimepicker({
+  format:'Y-m-d',
+  onShow:function( ct ){
+   this.setOptions({
+    maxDate:jQuery('#date_timepicker_end').val()?jQuery('#date_timepicker_end').val():false
 
   });
+  },
+  timepicker:false
+ });
 
+
+ jQuery('#date_timepicker_end').datetimepicker({
+  format:'Y-m-d',
+  onShow:function( ct ){
+   this.setOptions({
+    minDate:jQuery('#date_timepicker_start').val()?jQuery('#date_timepicker_start').val():false
+   })
+
+  },
+  timepicker:false
+ });
+});
 
 
 </script>
